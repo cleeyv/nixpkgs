@@ -22611,6 +22611,8 @@ with pkgs;
 
   jicofo = callPackage ../servers/jicofo { };
 
+  jigasi = callPackage ../servers/jigasi { };
+
   jitsi-meet = callPackage ../servers/web-apps/jitsi-meet { };
 
   jitsi-meet-prosody = callPackage ../misc/jitsi-meet-prosody { };
