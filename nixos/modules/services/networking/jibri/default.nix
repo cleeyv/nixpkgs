@@ -55,7 +55,11 @@ let
 
     recording = {
       recordings-directory = "/tmp/recordings";
+<<<<<<< HEAD
       finalize-script = "${cfg.finalizeScript}";
+=======
+      finalize-script = "/path/to/finalize"; # TODO(puck): replace with actual noop default
+>>>>>>> a1dc2ddd630 (nixos/jibri: init at 8.0-93-g51fe7a2)
     };
 
     streaming.rtmp-allow-list = [ ".*" ];
@@ -116,6 +120,8 @@ in
       '';
     };
 
+=======
+>>>>>>> a1dc2ddd630 (nixos/jibri: init at 8.0-93-g51fe7a2)
     xmppEnvironments = mkOption {
       description = ''
         XMPP servers to connect to.
@@ -305,7 +311,7 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
 
-      path = [ pkgs.chromedriver pkgs.chromium pkgs.ffmpeg-full ];
+      path = with pkgs; [ chromedriver chromium ffmpeg-full ];
 
       script = (concatStrings (mapAttrsToList
         (name: env: ''
@@ -314,7 +320,11 @@ in
         '')
         cfg.xmppEnvironments))
       + ''
+<<<<<<< HEAD
         ${pkgs.jre8_headless}/bin/java -Djava.util.logging.config.file=${./logging.properties-journal} -Dconfig.file=${configFile} -jar ${pkgs.jibri}/opt/jitsi/jibri/jibri.jar --config /var/lib/jibri/jibri.json
+=======
+        ${pkgs.jre_headless}/bin/java -Djava.util.logging.config.file=${./logging.properties-journal} -Dconfig.file=${configFile} -jar ${pkgs.jibri}/opt/jitsi/jibri/jibri.jar --config /var/lib/jibri/jibri.json
+>>>>>>> a1dc2ddd630 (nixos/jibri: init at 8.0-93-g51fe7a2)
       '';
 
       environment.HOME = "/var/lib/jibri";
@@ -331,10 +341,9 @@ in
       };
     };
 
-    systemd.tmpfiles.rules =
-      [
-        "d /var/log/jitsi/jibri 755 jibri"
-      ];
+    systemd.tmpfiles.rules = [
+      "d /var/log/jitsi/jibri 755 jibri jibri"
+    ];
 
 
 
