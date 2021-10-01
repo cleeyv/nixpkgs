@@ -1,5 +1,5 @@
 { lib, stdenv, fetchurl, unzip, makeWrapper
-, cairo, dbus, fontconfig, freetype, gdk-pixbuf, glib
+, cairo, fontconfig, freetype, gdk-pixbuf, glib
 , glibc, gtk2, libX11, nspr, nss, pango, gconf
 , libxcb, libXi, libXrender, libXext, dbus
 , testVersion, chromedriver
