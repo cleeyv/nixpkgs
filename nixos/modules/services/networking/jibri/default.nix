@@ -67,6 +67,7 @@ let
       "--enabled"
       "--disable-infobars"
       "--autoplay-policy=no-user-gesture-required"
+      (optionalString cfg.ignoreCert "--ignore-certificate-errors")
     ];
 
     stats.enable-stats-d = true;
@@ -120,6 +121,16 @@ in
       description = ''
         This script runs when jibri finishes recording a video of a conference.
       '';
+    };
+
+    ignoreCert = mkOption {
+        type = bool;
+        default = false;
+        example = true;
+        description = ''
+          Whether to enable the flag "--ignore-certificate-errors" for the Chromium browser opened by Jibri.
+          Intended for use in automated tests or anywhere else where using a verified cert for Jitsi-Meet is not possible.
+        '';
     };
 
     xmppEnvironments = mkOption {
