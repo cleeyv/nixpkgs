@@ -87,8 +87,9 @@ in
         File containing environment variables to be passed to the jigasi service,
         in which secret tokens can be specified securely by defining values for
         <literal>JIGASI_SIPUSER</literal>,
-        <literal>JIGASI_SIPPWD</literal> and
-        <literal>JIGASI_SIPSERVER</literal>.
+        <literal>JIGASI_SIPPWD</literal>,
+        <literal>JIGASI_SIPSERVER</literal> and
+        <literal>JIGASI_SIPPORT</literal>.
       '';
     };
 
@@ -143,6 +144,12 @@ in
         export JIGASI_XMPP_PASSWORD_BASE64=$(cat "${cfg.userPasswordFile}" | base64 -w 0)
 
         cp "${sipCommunicatorPropertiesFileUnsubstituted}" "$temp"
+        chmod 644 "$temp"
+        cat <<EOF >>"$temp"
+        net.java.sip.communicator.impl.protocol.sip.acc1403273890647.SERVER_PORT=$JIGASI_SIPPORT
+        net.java.sip.communicator.impl.protocol.sip.acc1403273890647.PREFERRED_TRANSPORT=udp
+        EOF
+        chmod 444 "$temp"
 
         # Replace <<$VAR_NAME>> from example config to $VAR_NAME for environment substitution
         sed -i -E \
