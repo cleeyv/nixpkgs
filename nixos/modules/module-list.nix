@@ -715,6 +715,7 @@
   ./services/networking/iscsi/root-initiator.nix
   ./services/networking/iscsi/target.nix
   ./services/networking/iwd.nix
+  ./services/networking/jibri/default.nix
   ./services/networking/jicofo.nix
   ./services/networking/jitsi-videobridge.nix
   ./services/networking/keepalived/default.nix
