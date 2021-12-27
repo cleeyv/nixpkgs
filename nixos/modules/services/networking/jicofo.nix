@@ -98,7 +98,7 @@ in
     {
       description = "JItsi COnference FOcus";
       wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      after = [ "network.target" "jitsi-videobridge.service" ];
 
       restartTriggers = [
         config.environment.etc."jitsi/jicofo/sip-communicator.properties".source
@@ -106,6 +106,7 @@ in
       environment.JAVA_SYS_PROPS = concatStringsSep " " (mapAttrsToList (k: v: "${k}=${toString v}") jicofoProps);
 
       script = ''
+        sleep 3 &&
         ${pkgs.jicofo}/bin/jicofo \
           --host=${cfg.xmppHost} \
           --domain=${if cfg.xmppDomain == null then cfg.xmppHost else cfg.xmppDomain} \
