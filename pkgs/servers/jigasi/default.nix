@@ -2,11 +2,11 @@
 
 let
   pname = "jigasi";
-  version = "1.1-231-gd792d0f";
-  arch = "amd64";
+  version = "1.1-265-g4049f97";
+  arch = "all";
   src = fetchurl {
     url = "https://download.jitsi.org/stable/${pname}_${version}-1_${arch}.deb";
-    sha256 = "0riij1i3k33rgzs4gqjffvcrx18a1dmz825nzk85xpsh972z0a4n";
+    sha256 = "ZFSvjSXYBUpbEc4IDm6ccdy4CF2F5dPqvzLH1H9CwzY=";
   };
 in
 stdenv.mkDerivation {
