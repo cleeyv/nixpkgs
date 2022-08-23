@@ -124,6 +124,7 @@ in
         "-Dnet.java.sip.communicator.SC_HOME_DIR_NAME" = "${homeDirName}";
         "-Djava.util.logging.config.file" = "${pkgs.jigasi}/etc/jitsi/jigasi/logging.properties";
       };
+      extraConfigs = concatStringsSep "\n" (mapAttrsToList (k: v: "${k}=${v}") cfg.config);
     in
     {
       description = "Jitsi Gateway to SIP";
@@ -181,6 +182,9 @@ in
         sed -i \
           's|\(# \)\(net.java.sip.communicator.service.gui.ALWAYS_TRUST_MODE_ENABLED=true\)|\2|g' \
           "${sipCommunicatorPropertiesFile}"
+
+        # Append lines from services.jigasi.config
+        echo -e "${extraConfigs}" >> "${sipCommunicatorPropertiesFile}"
       '';
 
       restartTriggers = [
