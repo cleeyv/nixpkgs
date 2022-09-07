@@ -4566,6 +4566,8 @@ with pkgs;
 
   psrecord = python3Packages.callPackage ../tools/misc/psrecord {};
 
+  qpress = callPackage ../tools/compression/qpress { };
+
   r53-ddns = callPackage ../applications/networking/r53-ddns { };
 
   rare = python3Packages.callPackage ../games/rare { };
