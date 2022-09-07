@@ -68,9 +68,9 @@ lib.mapAttrs
   };
   small-en-us = {
     lang = "small-en-us";
-    version = "0.22";
+    version = "0.15";
     lgraph = "";
-    sha256 = "sha256-kakOhA7hEtDM6WY3oAnb8xKZil9WTA3xePpLIxr2+yM=";
+    sha256 = "sha256-CIoPZ/krX+UW2w7c84W3oc1n4zc9BBS/fc8rVYUthuY=";
     license = lib.licenses.asl20;
   };
   en-us-lgraph = {
