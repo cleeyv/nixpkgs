@@ -1,0 +1,59 @@
+diff --git a/lib/pdfimposer.py b/lib/pdfimposer.py
+index 2da6cbe..7014420 100644
+--- a/lib/pdfimposer.py
++++ b/lib/pdfimposer.py
+@@ -576,15 +576,15 @@ class StreamConverter(AbstractConverter):
+         self._output_stream = output_stream
+         self._input_stream = input_stream
+ 
+-        self._inpdf = pyPdf.PdfFileReader(input_stream)
++        self._inpdf = pyPdf.PdfReader(input_stream)
+ 
+     def get_input_height(self):
+-        page = self._inpdf.getPage(0)
++        page = self._inpdf.pages[0]
+         height = page.mediaBox.getHeight()
+         return int(height)
+ 
+     def get_input_width(self):
+-        page = self._inpdf.getPage(0)
++        page = self._inpdf.pages[0]
+         width = page.mediaBox.getWidth()
+         return int(width)
+ 
+@@ -761,7 +761,7 @@ class StreamConverter(AbstractConverter):
+         """
+         # XXX: Translated progress messages
+         self.__fix_page_orientation_for_booklet()
+-        outpdf = pyPdf.PdfFileWriter()
++        outpdf = pyPdf.PdfWriter()
+ 
+         current_page = 0
+         while current_page < len(sequence):
+@@ -777,7 +777,7 @@ class StreamConverter(AbstractConverter):
+                 for horiz_pos in range(0, self.get_pages_in_width()):
+                     if current_page < len(sequence) and sequence[current_page] is not None:
+                         page.mergeScaledTranslatedPage(
+-                            self._inpdf.getPage(sequence[current_page]),
++                            self._inpdf.pages[sequence(current_page)],
+                             self.get_reduction_factor(), 
+                             horiz_pos*self.get_output_width() / \
+                                 self.get_pages_in_width(),
+@@ -801,7 +801,7 @@ class StreamConverter(AbstractConverter):
+ 
+         self.__fix_page_orientation_for_linearize()
+         sequence = self.__get_sequence_for_linearize()
+-        outpdf = pyPdf.PdfFileWriter()
++        outpdf = pyPdf.PdfWriter()
+ 
+         output_page = 0
+         for input_page in range(0, self.get_page_count()):
+@@ -815,7 +815,7 @@ class StreamConverter(AbstractConverter):
+                                                       self.get_output_height(),
+                                                       sequence[output_page])
+                         page.mergeScaledTranslatedPage(
+-                            self._inpdf.getPage(input_page),
++                            self._inpdf.pages[input_page],
+                             self.get_increasing_factor(),
+                             - horiz_pos * self.get_output_width(),
+                             (vert_pos - self.get_pages_in_height() + 1) * \

@@ -23,6 +23,7 @@ python3.pkgs.buildPythonApplication rec {
   patches = [
     ./i18n.patch
     ./configdir.patch
+    ./pyPdf.patch
   ];
 
   nativeBuildInputs = [ intltool pandoc wrapGAppsHook gobject-introspection ];
